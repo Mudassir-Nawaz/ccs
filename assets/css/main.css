@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@source "hugo_stats.json";
+
+@theme {
+    --font-primary: "Urbanist", sans-serif;
+
+    --color-primary: var(--color-orange-500);
+    --color-accent: var(--color-orange-700);
+    --color-dark: var(--color-gray-800);
+    --color-dark-dim: var(--color-gray-600);
+    --color-text-dark: var(--color-gray-900);
+    --color-text-dark-dim: var(--color-gray-700);
+    --color-light: var(--color-gray-100);
+    --color-light-dim: var(--color-gray-200);
+    --color-text-light: var(--color-gray-100);
+    --color-text-light-dim: var(--color-gray-300);
+}
+
+*::selection {
+    @apply bg-primary/70 text-light;
+}
+
+.text-gradient {
+    @apply bg-gradient-to-br from-primary to-accent from-40% bg-clip-text text-transparent;
+}
+
+.bg-gradient {
+    @apply bg-gradient-to-br from-primary to-accent from-40%;
+}

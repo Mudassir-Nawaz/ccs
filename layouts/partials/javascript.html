@@ -1,0 +1,20 @@
+{{ $swiper := resources.Get "js/swiper.js" }}
+{{ $main := resources.Get "js/main.js" }}
+
+{{ $bundle := slice $swiper $main | resources.Concat "js/bundle.js"  }}
+{{ with $bundle }}
+  {{$opts := dict
+    "minify" (not hugo.IsDevelopment)
+    "sourceMap" (cond hugo.IsDevelopment "external" "")
+    "targetPath" "js/bundle.js"
+  }}
+  {{ with . | js.Build $opts }}
+    {{ if hugo.IsDevelopment }}
+      <script src="{{ .RelPermalink }}"></script>
+    {{ else }}
+      {{ with . | fingerprint }}
+        <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

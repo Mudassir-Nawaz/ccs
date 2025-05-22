@@ -1,0 +1,55 @@
+baseURL: 'https://example.org/'
+languageCode: 'en-us'
+title: 'CCS'
+
+#######################
+######### Menus Settings
+#######################
+menus:
+  main:
+    - Name: 'Home'
+      URL: '/'
+      weight: 1
+    - Name: 'Get Involved'
+      URL: '/get-involved/'
+      weight: 2
+    - Name: 'Accomplishments'
+      URL: '/accomplishments/'
+      weight: 3
+    - Name: 'About Us'
+      URL: '/about-us/'
+      weight: 4
+    - Name: 'Contact Us'
+      URL: '/contact-us/'
+      weight: 5
+
+
+
+#######################
+######### Params Settings
+#######################
+params:
+  header:
+    cta:
+      Label: 'Donate'
+      url: '/get-involved/'
+
+
+#######################
+######### Dev Settings
+#######################
+build:
+  buildStats:
+    enable: true
+  cachebusters:
+  - source: assets/notwatching/hugo_stats\.json
+    target: css
+  - source: (postcss|tailwind)\.config\.js`
+    target: css
+module:
+  mounts:
+  - source: assets
+    target: assets
+  - disableWatch: true
+    source: hugo_stats.json
+    target: assets/notwatching/hugo_stats.json

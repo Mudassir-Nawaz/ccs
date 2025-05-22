@@ -1,0 +1,145 @@
+<header class="fixed w-full bg-light-dim z-50 transition-all py-5 flex justify-center">
+    <div class="container mx-auto px-4 flex justify-between items-center size-full">
+        <nav class="self-stretch">
+            {{ if .Site.Params.header.logo }}
+                <a href="{{ site.BaseURL }}" class="w-[158.03px] h-full inline-block"><img src="{{ site.Params.logo | relURL }}" alt="{{ site.Title }} Logo" class="size-full object-contain"></a>
+            {{ else }}
+                <a href="{{ site.BaseURL }}" class="w-[158.03px] h-full inline-block text-3xl font-black text-gradient font-primary">{{ site.Title }}</a>
+            {{ end }}
+        </nav>
+        <button class="size-7 cursor-pointer toggle-menu lg:hidden">
+            <svg viewBox="0 0 25 24" fill="none" class="size-full object-contain open-menu" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                <path d="M3.5625 6C3.5625 5.58579 3.89829 5.25 4.3125 5.25H20.3125C20.7267 5.25 21.0625 5.58579 21.0625 6C21.0625 6.41421 20.7267 6.75 20.3125 6.75L4.3125 6.75C3.89829 6.75 3.5625 6.41422 3.5625 6Z" fill="#343C54"/>
+                <path d="M3.5625 18C3.5625 17.5858 3.89829 17.25 4.3125 17.25L20.3125 17.25C20.7267 17.25 21.0625 17.5858 21.0625 18C21.0625 18.4142 20.7267 18.75 20.3125 18.75L4.3125 18.75C3.89829 18.75 3.5625 18.4142 3.5625 18Z" fill="#343C54"/>
+                <path d="M4.3125 11.25C3.89829 11.25 3.5625 11.5858 3.5625 12C3.5625 12.4142 3.89829 12.75 4.3125 12.75L20.3125 12.75C20.7267 12.75 21.0625 12.4142 21.0625 12C21.0625 11.5858 20.7267 11.25 20.3125 11.25L4.3125 11.25Z" fill="#343C54"/>
+            </svg>
+            <svg viewBox="0 0 24 24" fill="none" class="size-full object-contain hidden close-menu" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                <path d="M6.21967 7.28033C5.92678 6.98744 5.92678 6.51256 6.21967 6.21967C6.51256 5.92678 6.98744 5.92678 7.28033 6.21967L11.999 10.9384L16.7176 6.2198C17.0105 5.92691 17.4854 5.92691 17.7782 6.2198C18.0711 6.51269 18.0711 6.98757 17.7782 7.28046L13.0597 11.999L17.7782 16.7176C18.0711 17.0105 18.0711 17.4854 17.7782 17.7782C17.4854 18.0711 17.0105 18.0711 16.7176 17.7782L11.999 13.0597L7.28033 17.7784C6.98744 18.0713 6.51256 18.0713 6.21967 17.7784C5.92678 17.4855 5.92678 17.0106 6.21967 16.7177L10.9384 11.999L6.21967 7.28033Z" fill="#343C54"/>
+            </svg>
+        </button>
+        <div class="absolute lg:static top-15 left-0 w-full lg:w-fit lg:translate-x-0 transition-all duration-500 menu bg-light-dim translate-x-full lg:bg-transparent">
+            <div class="size-full px-4 py-12 lg:p-0 flex flex-col gap-y-4">
+                {{ $current := . }}
+                {{ with site.Menus.main }}
+                <ul class="flex flex-col gap-y-8 lg:flex-row gap-x-12 items-center">
+                    {{ range $i, $p := . }}
+                    {{ $menu := .URL | absURL }}
+                    {{ $page := $current.RelPermalink | absURL }}
+                    {{ $active := eq $menu $page }}
+                    {{ if .HasChildren }}
+                    {{ $id := replaceRE "[-!@#$%^&*/\\\\ ]" "_" .Name }}
+                    {{ $id := $id | urlize | safeJS }}
+                    <li class="flex flex-col gap-y-4 w-full lg:w-fit">
+                        <button id="dropdown-button-{{ $id }}" class="flex justify-between lg:gap-2 items-center cursor-pointer w-full">
+                            <span class="font-primary text-sm leading-6 tracking-[7%] text-dark uppercase">{{ .Name }}</span>
+                            <svg class="size-2.5 lg:size-3 text-inherit transition-all" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path class="fill-current" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                            </svg>
+                        </button>
+                        <ul class="transition-all hidden lg:block lg:w-[600px] lg:absolute lg:top-10 lg:opacity-0 lg:-translate-x-3 lg:pointer-events-none" id="dropdown-{{ $id }}">
+                            <div class="w-full px-4 flex flex-col gap-y-5 lg:gap-x-4 lg:bg-light-dim lg:rounded-b-lg lg:grid lg:grid-cols-2 lg:relative lg:z-10 lg:p-6.5">
+                                {{ range .Children }}
+                                <li class="flex flex-col gap-y-4 lg:relative">
+                                    <a href="{{ .URL }}" class="flex justify-between items-center cursor-pointer w-full">
+                                        <span class="font-primary text-sm leading-6 tracking-[7%] text-dark uppercase">{{ .Name }}</span>
+                                    </a>
+                                </li>
+                                {{ end }}
+                            </div>
+                        </ul>
+                    </li>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            const mql{{ $id }} = window.matchMedia("(max-width: 1023px)");
+                            const button{{ $id }} = document.getElementById("dropdown-button-{{ $id }}");
+                            const dropdown{{ $id }} = document.getElementById("dropdown-{{ $id }}");
+                
+                            if (mql{{ $id }}.matches) {
+                                button{{ $id }}.addEventListener('click', function () {
+                                    dropdown{{ $id }}.classList.toggle('hidden');
+                                    dropdown{{ $id }}.classList.toggle('flex');
+                                    this.children[1].classList.toggle('rotate-90');
+                                    this.children[1].classList.toggle('text-inherit');
+                                    this.children[1].classList.toggle('text-primary');
+                                });
+                            };
+
+                            if (!mql{{ $id }}.matches) {
+                                let isHoveringButton = false;
+                                let isHoveringDropdown = false;
+                
+                                const showDropdown = () => {
+                                    dropdown{{ $id }}.classList.remove("lg:opacity-0", "lg:-translate-x-3", "lg:pointer-events-none");
+                                    dropdown{{ $id }}.classList.add("lg:opacity-100", "lg:pointer-events-auto");
+                                    button{{ $id }}.children[1].classList.remove('text-inherit');
+                                    button{{ $id }}.children[1].classList.add('text-primary');
+                                };
+                
+                                const hideDropdown = () => {
+                                    if (!isHoveringButton && !isHoveringDropdown) {
+                                        dropdown{{ $id }}.classList.remove("lg:opacity-100", "lg:pointer-events-auto");
+                                        dropdown{{ $id }}.classList.add("lg:opacity-0", "lg:-translate-x-3", "lg:pointer-events-none");
+                                        button{{ $id }}.children[1].classList.remove('text-primary');
+                                        button{{ $id }}.children[1].classList.add('text-inherit');
+                                    };
+                                };
+
+                                // Button hover
+                                button{{ $id }}.addEventListener("mouseenter", () => {
+                                    isHoveringButton = true;
+                                    showDropdown();
+                                });
+                
+                                button{{ $id }}.addEventListener("mouseleave", () => {
+                                    isHoveringButton = false;
+                                    setTimeout(hideDropdown, 100); // allow time to reach dropdown
+                                });
+                
+                                // Dropdown hover
+                                dropdown{{ $id }}.addEventListener("mouseenter", () => {
+                                    isHoveringDropdown = true;
+                                });
+                
+                                dropdown{{ $id }}.addEventListener("mouseleave", () => {
+                                    isHoveringDropdown = false;
+                                    setTimeout(hideDropdown, 100);
+                                });
+                            };
+                        });
+                    </script>
+                    {{ else }}
+                    {{ if $active }}
+                    <li class="w-full lg:w-fit"><a class="font-primary font-bold text-sm leading-6 tracking-[7%] text-primary cursor-pointer uppercase">{{ .Name }}</a></li>
+                    {{ else }}
+                    <li class="w-full lg:w-fit"><a href="{{ .URL }}" class="font-primary text-sm leading-6 tracking-[7%] text-dark uppercase hover:text-black">{{ .Name }}</a></li>
+                    {{ end }}
+                    {{ end }}
+                    {{ end }}
+                </ul>
+                {{ end }}
+                {{ with site.Params.header.cta }}
+                <a 
+                    href="{{ .url }}"
+                    class="py-3 w-full bg-gradient font-primary font-bold text-sm leading-6 text-light-dim inline-flex items-center justify-center lg:hidden">
+                    <span class="uppercase">{{ .label }}</span>
+                    <svg class="size-3 text-inherit ml-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path class="fill-current" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                    </svg>
+                </a>
+                {{ end }}
+            </div>
+        </div>
+        <div class="hidden lg:block">
+            {{ with site.Params.header.cta }}
+            <a 
+                href="{{ .url }}"
+                class="w-40 h-10 bg-gradient font-primary font-bold text-sm leading-6 text-light-dim inline-flex items-center justify-center group">
+                <span class="uppercase">{{ .label }}</span>
+                <svg class="size-3 text-inherit ml-3 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path class="fill-current" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+                </svg>
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</header>

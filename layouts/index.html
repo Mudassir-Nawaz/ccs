@@ -1,0 +1,55 @@
+{{ define "main" }}
+{{/*  hero section  */}}
+<section class="w-full h-screen">
+    {{ $hero_video := "videos/placeholder.mp4" | relURL }}
+    <div class="relative top-20 h-screen flex justify-center items-center">
+        <video autoplay muted loop class="absolute inset-0 h-full w-full object-cover object-top">
+            <source src="{{ $hero_video }}" type="video/mp4">
+        </video>
+        <div class="absolute bg-black/70 inset-0"></div>
+
+        <div class="container relative mx-auto">
+            <div class="swiper hero-swiper max-w-xs sm:max-w-md lg:max-w-3xl">
+                <div class="swiper-wrapper">
+                    <div class="space-y-5 text-center swiper-slide">
+                        <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
+                        <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/") }}
+                    </div>
+    
+                    <div class="space-y-5 text-center swiper-slide">
+                        <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
+                        <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/") }}
+                    </div>
+    
+                    <div class="space-y-5 text-center swiper-slide">
+                        <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
+                        <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/") }}
+                    </div>
+                </div>
+            </div>
+    
+            <button aria-label="previous slide" class="absolute top-1/2 -translate-y-1/2 left-10 hidden lg:flex justify-center items-center size-14 border border-light-dim hover:border-light hover:scale-110 transition-all cursor-pointer group rounded-full hero-prev-slide">
+                <svg class="size-7 text-light-dim group-hover:text-light" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                    <path fill="currentColor" d="M15.2335 5.21967C15.5263 5.51256 15.5263 5.98744 15.2335 6.28033L9.51379 12L15.2335 17.7197C15.5263 18.0126 15.5263 18.4874 15.2335 18.7803C14.9406 19.0732 14.4657 19.0732 14.1728 18.7803L7.92279 12.5303C7.6299 12.2374 7.6299 11.7626 7.92279 11.4697L14.1728 5.21967C14.4657 4.92678 14.9406 4.92678 15.2335 5.21967Z" fill="#343C54"/>
+                </svg>
+            </button>
+    
+            <button aria-label="next slide" class="absolute top-1/2 -translate-y-1/2 right-10 hidden lg:flex justify-center items-center size-14 border border-light-dim hover:border-light hover:scale-110 transition-all cursor-pointer group rounded-full hero-next-slide">
+                <svg class="size-7 rotate-180 text-light-dim group-hover:text-light" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                    <path fill="currentColor" d="M15.2335 5.21967C15.5263 5.51256 15.5263 5.98744 15.2335 6.28033L9.51379 12L15.2335 17.7197C15.5263 18.0126 15.5263 18.4874 15.2335 18.7803C14.9406 19.0732 14.4657 19.0732 14.1728 18.7803L7.92279 12.5303C7.6299 12.2374 7.6299 11.7626 7.92279 11.4697L14.1728 5.21967C14.4657 4.92678 14.9406 4.92678 15.2335 5.21967Z" fill="#343C54"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</section>
+{{/*  end hero  */}}
+
+{{/*  gallery section  */}}
+<section class="mt-20">
+
+</section>
+{{/*  end gallery  */}}
+{{ end }}

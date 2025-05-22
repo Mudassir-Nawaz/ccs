@@ -1,0 +1,23 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{/*  aos  */}}
+{{ $aos := resources.Get "js/aos.js" }}
+{{ if hugo.IsDevelopment }}
+<script src="{{ $aos.RelPermalink }}"></script>
+{{ else }}
+{{ with $aos | minify | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+{{ end }}
+{{ end }}
+
+{{/*  title  */}}
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Page.Title }} - {{ site.Title }}{{ end }}</title>
+
+{{/*  styles  */}}
+{{ partialCached "style.html" . }}
+
+{{/*  fonts  */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
