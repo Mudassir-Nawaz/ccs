@@ -2,7 +2,7 @@
 {{/*  hero section  */}}
 <section class="w-full h-screen">
     {{ $hero_video := "videos/placeholder.mp4" | relURL }}
-    <div class="relative top-20 h-screen flex justify-center items-center">
+    <div class="relative top-34 h-screen flex justify-center items-center">
         <video autoplay muted loop class="absolute inset-0 h-full w-full object-cover object-top">
             <source src="{{ $hero_video }}" type="video/mp4">
         </video>
@@ -14,19 +14,16 @@
                     <div class="space-y-5 text-center swiper-slide">
                         <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
                         <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                        {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/") }}
                     </div>
     
                     <div class="space-y-5 text-center swiper-slide">
                         <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
                         <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                        {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/") }}
                     </div>
     
                     <div class="space-y-5 text-center swiper-slide">
                         <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
                         <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                        {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/") }}
                     </div>
                 </div>
             </div>
@@ -48,8 +45,140 @@
 {{/*  end hero  */}}
 
 {{/*  gallery section  */}}
-<section class="mt-20">
-
+<section class="mt-34">
+    <div class="container mx-auto space-y-20 py-20 px-4">
+        <div class="space-y-5 max-w-3xl mx-auto text-center">
+            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">How we do it</h1>
+            <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+            {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+        </div>
+        <div data-aos="fade-up" data-aos-duration="1400">
+            {{ $placehold := resources.Get "galleries/placeholder" }}
+            {{ partial "components/gallery.html" (dict "dir" $placehold ) }}
+        </div>
+    </div>
 </section>
 {{/*  end gallery  */}}
+
+{{/*  goals section  */}}
+<section class="py-20 bg-light-dim relative overflow-hidden">
+    <div class="absolute size-40 rounded-full top-10 lg:top-20 left-5 lg:left-30 bg-accent/10"></div>
+    <div class="absolute size-60 rounded-full -bottom-40 left-1/2 -translate-x-1/2 bg-accent/10"></div>
+    <div class="absolute size-30 rounded-full top-1/2 -translate-y-1/2 -right-15 lg:-top-10 lg:right-1/5 lg:translate-y-0 bg-accent/10"></div>
+    <div class="hidden lg:block absolute size-36 rounded-full right-5 bottom-20 bg-accent/10"></div>
+    <div class="relative container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:justify-between">
+        <div class="space-y-5 max-w-md mx-auto text-center lg:text-left" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Our Goals</h1>
+            <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+            {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+        </div>
+        <div class="space-y-5" data-aos="fade-up" data-aos-duration="1400">
+            <div class="goals-pagination size-14 mx-auto lg:mx-0 rounded-full border border-dark flex justify-center items-center text-lg font-primary text-dark"></div>
+            <div class="swiper goals-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="space-y-2 text-center lg:max-w-sm lg:text-left">
+                            <h1 class="text-xl tracking-wider font-bold text-dark font-primary">Goal 1</h1>
+                            <p class="font-primary text-dark-dim tracking-wider">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="space-y-2 text-center lg:max-w-sm lg:text-left">
+                            <h1 class="text-xl tracking-wider font-bold text-dark font-primary">Goal 1</h1>
+                            <p class="font-primary text-dark-dim tracking-wider">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="space-y-2 text-center lg:max-w-sm lg:text-left">
+                            <h1 class="text-xl tracking-wider font-bold text-dark font-primary">Goal 1</h1>
+                            <p class="font-primary text-dark-dim tracking-wider">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center lg:justify-start gap-5">
+                <button class="goals-prev-slide size-10 cursor-pointer rounded-full border border-dark flex justify-center items-center text-dark">
+                    <svg class="size-7 text-inherit" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                        <path fill="currentColor" d="M15.2335 5.21967C15.5263 5.51256 15.5263 5.98744 15.2335 6.28033L9.51379 12L15.2335 17.7197C15.5263 18.0126 15.5263 18.4874 15.2335 18.7803C14.9406 19.0732 14.4657 19.0732 14.1728 18.7803L7.92279 12.5303C7.6299 12.2374 7.6299 11.7626 7.92279 11.4697L14.1728 5.21967C14.4657 4.92678 14.9406 4.92678 15.2335 5.21967Z" fill="#343C54"/>
+                    </svg>
+                </button>
+                <button class="goals-next-slide size-10 cursor-pointer rounded-full border border-dark flex justify-center items-center text-dark">
+                    <svg class="size-7 text-inherit rotate-180" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(0 0 0)">
+                        <path fill="currentColor" d="M15.2335 5.21967C15.5263 5.51256 15.5263 5.98744 15.2335 6.28033L9.51379 12L15.2335 17.7197C15.5263 18.0126 15.5263 18.4874 15.2335 18.7803C14.9406 19.0732 14.4657 19.0732 14.1728 18.7803L7.92279 12.5303C7.6299 12.2374 7.6299 11.7626 7.92279 11.4697L14.1728 5.21967C14.4657 4.92678 14.9406 4.92678 15.2335 5.21967Z" fill="#343C54"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{{/*  end goals  */}}
+
+{{/*  accomplishments section  */}}
+<section class="py-20">
+    <div class="container mx-auto px-4 space-y-10">
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-5">
+            <div class="space-y-5 lg:w-1/2">
+                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 1</h1>
+                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+            </div>
+            <div class="lg:w-1/2">
+                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 ml-auto" data-aos="fade-up" data-aos-duration="1400">
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse justify-between items-center gap-5">
+            <div class="space-y-5 lg:w-1/2">
+                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 2</h1>
+                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+            </div>
+            <div class="lg:w-1/2">
+                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 mr-auto" data-aos="fade-up" data-aos-duration="1400">
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-5">
+            <div class="space-y-5 lg:w-1/2">
+                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 3</h1>
+                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+            </div>
+            <div class="lg:w-1/2">
+                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 ml-auto" data-aos="fade-up" data-aos-duration="1400">
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse justify-between items-center gap-5">
+            <div class="space-y-5 lg:w-1/2">
+                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 4</h1>
+                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+            </div>
+            <div class="lg:w-1/2">
+                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 mr-auto" data-aos="fade-up" data-aos-duration="1400">
+            </div>
+        </div>
+    </div>
+</section>
+{{/*  end accomplishments  */}}
+
+{{/*  cta section  */}}
+<section class="py-20 bg-gradient">
+    <div class="max-w-5xl mx-auto px-4 flex flex-col lg:flex-row justify-between lg:items-center gap-5">
+        <div class="space-y-5 lg:w-1/2">
+            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Sponser a kid</h1>
+            {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/" "color" "bg-gradient-to-br from-dark-dim to-dark text-light") }}
+        </div>
+        <div class="mx-[60px] hidden lg:inline-block">
+            <span class="px-[1px] rotate-12 bg-dark inline-block h-[111.4px]"></span>
+        </div>
+        <div class="lg:w-1/2">
+            <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+        </div>
+    </div>
+</section>
+{{/*  end cta  */}}
 {{ end }}

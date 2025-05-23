@@ -1,4 +1,4 @@
-<a href="{{ .url }}" class="inline-flex px-8 py-3 bg-gradient rounded-full text-sm text-light font-primary justify-center items-center group" data-aos="fade-up" data-aos-duration="1400">
+<a href="{{ .url }}" class="inline-flex px-8 py-3 {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group" data-aos="fade-up" data-aos-duration="1400">
     <span>
         {{ .label }}
     </span>

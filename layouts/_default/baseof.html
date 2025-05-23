@@ -3,7 +3,7 @@
 <head>
     {{ partial "head.html" . }}
 </head>
-<body>
+<body data-scroll="true" class="bg-light data-[scroll='false']:overflow-y-hidden">
     {{ partial "header.html" . }}
     {{ block "main" . }}{{ end }}
     {{ partial "footer.html" . }}

@@ -4,16 +4,16 @@
 @theme {
     --font-primary: "Urbanist", sans-serif;
 
-    --color-primary: var(--color-orange-500);
-    --color-accent: var(--color-orange-700);
-    --color-dark: var(--color-gray-800);
-    --color-dark-dim: var(--color-gray-600);
-    --color-text-dark: var(--color-gray-900);
-    --color-text-dark-dim: var(--color-gray-700);
-    --color-light: var(--color-gray-100);
-    --color-light-dim: var(--color-gray-200);
-    --color-text-light: var(--color-gray-100);
-    --color-text-light-dim: var(--color-gray-300);
+    --color-primary: #F1B639ff;
+    --color-accent: #A9441Dff;
+    --color-dark: #000100ff;
+    --color-dark-dim: #0B0704ff;
+    --color-text-dark: #000100ff;
+    --color-text-dark-dim: #0B0704ff;
+    --color-light: #EDE6EAff;
+    --color-light-dim: #CFC6B8ff;
+    --color-text-light: #EDE6EAff;
+    --color-text-light-dim: #CFC6B8ff;
 }
 
 *::selection {

@@ -1,6 +1,6 @@
 baseURL: 'https://example.org/'
 languageCode: 'en-us'
-title: 'CCS'
+title: 'TLUCF'
 
 #######################
 ######### Menus Settings
@@ -29,10 +29,13 @@ menus:
 ######### Params Settings
 #######################
 params:
-  header:
-    cta:
-      Label: 'Donate'
-      url: '/get-involved/'
+    logo: 'images/logo.png'
+    header:
+      cta:
+        Label: 'Donate'
+        url: '/get-involved/'
+    footer:
+      slogan: 'The lifting up children fund'
 
 
 #######################

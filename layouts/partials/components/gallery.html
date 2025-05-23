@@ -1,0 +1,370 @@
+{{ $counter := math.Counter }}
+{{ $dir := .dir }}
+{{ if $dir }}
+{{ $resources := resources.Match (printf "%s/*" $dir) }}
+
+<main>
+  <section aria-label="Gallery">
+    <div class="grid grid-cols-3 lg:grid-cols-4 auto-rows-[150px] gap-4" id="custom-gallery-{{ $counter }}" role="list">
+      {{ range $i, $res := $resources }}
+        {{ $ext := lower (delimit (last 1 (split $res.Name ".")) "") }}
+        {{ $isVideo := or (eq $ext "mp4") (eq $ext "webm") (eq $ext "ogg") }}
+        {{ $img := "" }}
+        {{ if not $isVideo }}
+          {{ $img = $res.Fit "600x600" }}
+        {{ end }}
+        <figure
+          tabindex="0"
+          role="listitem"
+          aria-label="{{ if $isVideo }}Video{{ else }}Image{{ end }} {{ $res.Name }}"
+          class="{{ if eq (mod $i 4) 0 }}col-span-2 row-span-2{{ end }} cursor-pointer overflow-hidden rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          data-type="{{ if $isVideo }}video{{ else }}image{{ end }}"
+          data-src="{{ $res.RelPermalink }}">
+          {{ if $isVideo }}
+            <video src="{{ $res.RelPermalink }}" class="w-full h-full object-cover" muted playsinline aria-label="{{ $res.Name }}"></video>
+          {{ else if $img }}
+            <img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}" class="w-full h-full object-cover">
+          {{ end }}
+        </figure>
+      {{ end }}
+    </div>
+  </section>
+</main>
+
+<!-- Modal HTML -->
+<div id="gallery-modal-{{ $counter }}"
+     class="fixed inset-0 size-full bg-black/80 items-center justify-center z-50 hidden"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="gallery-modal-counter-{{ $counter }}"
+     tabindex="-1">
+    <div id="gallery-modal-content-{{ $counter }}"
+         class="relative max-w-3xl w-full flex flex-col items-center justify-center"
+         tabindex="0">
+      <!-- Content will be injected here -->
+    </div>
+    <!-- Counter -->
+    <div id="gallery-modal-counter-{{ $counter }}"
+         class="absolute top-2 left-2 text-white text-lg bg-black/60 rounded px-3 py-1"
+         aria-live="polite"></div>
+    <!-- Close Button -->
+    <button id="gallery-modal-close-{{ $counter }}"
+            class="absolute top-2 right-2 text-white text-3xl hover:text-red-400 transition-colors cursor-pointer"
+            aria-label="Close gallery"
+            type="button">&times;</button>
+    <!-- Navigation Buttons -->
+    <button id="gallery-modal-prev-{{ $counter }}"
+            aria-label="Previous item"
+            class="absolute top-1/2 -translate-y-1/2 left-2 cursor-pointer bg-black/40 rounded-full w-12 h-12 flex items-center justify-center text-white text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="button">
+        <svg class="size-10 text-light" viewBox="0 0 25 24" fill="none" aria-hidden="true">
+            <path fill="currentColor" d="M15.2335 5.21967C15.5263 5.51256 15.5263 5.98744 15.2335 6.28033L9.51379 12L15.2335 17.7197C15.5263 18.0126 15.5263 18.4874 15.2335 18.7803C14.9406 19.0732 14.4657 19.0732 14.1728 18.7803L7.92279 12.5303C7.6299 12.2374 7.6299 11.7626 7.92279 11.4697L14.1728 5.21967C14.4657 4.92678 14.9406 4.92678 15.2335 5.21967Z"/>
+        </svg>
+    </button>
+    <button id="gallery-modal-next-{{ $counter }}"
+            aria-label="Next item"
+            class="absolute top-1/2 -translate-y-1/2 right-2 cursor-pointer bg-black/40 rounded-full w-12 h-12 flex items-center justify-center text-white text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="button">
+        <svg class="size-10 rotate-180 text-light" viewBox="0 0 25 24" fill="none" aria-hidden="true">
+            <path fill="currentColor" d="M15.2335 5.21967C15.5263 5.51256 15.5263 5.98744 15.2335 6.28033L9.51379 12L15.2335 17.7197C15.5263 18.0126 15.5263 18.4874 15.2335 18.7803C14.9406 19.0732 14.4657 19.0732 14.1728 18.7803L7.92279 12.5303C7.6299 12.2374 7.6299 11.7626 7.92279 11.4697L14.1728 5.21967C14.4657 4.92678 14.9406 4.92678 15.2335 5.21967Z"/>
+        </svg>
+    </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Use unique IDs for this gallery instance
+  const gallery = document.getElementById('custom-gallery-{{ $counter }}');
+  const modal = document.getElementById('gallery-modal-{{ $counter }}');
+  const modalContent = document.getElementById('gallery-modal-content-{{ $counter }}');
+  const closeBtn = document.getElementById('gallery-modal-close-{{ $counter }}');
+  const prevBtn = document.getElementById('gallery-modal-prev-{{ $counter }}');
+  const nextBtn = document.getElementById('gallery-modal-next-{{ $counter }}');
+  const counter = document.getElementById('gallery-modal-counter-{{ $counter }}');
+  const galleryItems = Array.from(gallery.querySelectorAll('figure[data-type]'));
+  let currentIndex = -1;
+  let animating = false;
+  let lastFocusedElement = null;
+
+  // Add transition classes to modal and content
+  modal.classList.add('transition-opacity', 'duration-300', 'ease-in-out');
+  modalContent.classList.add('transition-transform', 'duration-300', 'ease-in-out');
+
+  // Accessibility: trap focus inside modal
+  function trapFocus(e) {
+    if (!modal.classList.contains('hidden')) {
+      const focusable = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
+        }
+      }
+    }
+  }
+
+  function updateCounter() {
+    counter.textContent = `${currentIndex + 1} / ${galleryItems.length}`;
+  }
+
+  function animateContent(direction = 0, cb) {
+    // direction: -1 left, 1 right, 0 fade
+    const el = modalContent.querySelector('img,video');
+    if (!el) return cb && cb();
+    if (direction === 0) {
+      el.classList.add('opacity-0', 'transition-opacity', 'duration-300');
+      setTimeout(() => {
+        cb && cb();
+      }, 300);
+    } else {
+      el.classList.add('transition-transform', 'duration-300');
+      el.style.transform = `translateX(${direction * -100}%)`;
+      el.style.opacity = '0';
+      setTimeout(() => {
+        cb && cb();
+      }, 300);
+    }
+  }
+
+  function showModal(index, slideDirection = 0) {
+    if (animating) return;
+    // Loop index if out of bounds
+    if (index < 0) index = galleryItems.length - 1;
+    if (index >= galleryItems.length) index = 0;
+    const item = galleryItems[index];
+    if (!item) return;
+    const type = item.getAttribute('data-type');
+    const src = item.getAttribute('data-src');
+    let html = '';
+    if (type === 'image') {
+      html = `<img src="${src}" class="mx-auto transition-all duration-300 focus:outline-none" style="opacity:0;transform:translateX(${slideDirection * 100}%);" alt="Gallery image ${index + 1}" />`;
+    } else if (type === 'video') {
+      html = `<video src="${src}" controls autoplay class="mx-auto transition-all duration-300 focus:outline-none" style="opacity:0;transform:translateX(${slideDirection * 100}%);" aria-label="Gallery video ${index + 1}"></video>`;
+    }
+    // Disable body scroll
+    document.body.setAttribute('data-scroll', 'false');
+    animating = true;
+    // Animate out old content if exists
+    if (modalContent.querySelector('img,video')) {
+      animateContent(slideDirection, () => {
+        modalContent.querySelectorAll('img,video').forEach(e => e.remove());
+        modalContent.insertAdjacentHTML('beforeend', html);
+        requestAnimationFrame(() => {
+          const newEl = modalContent.querySelector('img,video');
+          newEl.style.opacity = '1';
+          newEl.style.transform = 'translateX(0)';
+          newEl.focus && newEl.focus();
+        });
+        setTimeout(() => {
+          animating = false;
+        }, 300);
+      });
+    } else {
+      modalContent.querySelectorAll('img,video').forEach(e => e.remove());
+      modalContent.insertAdjacentHTML('beforeend', html);
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      // Fade in modal
+      modal.style.opacity = '0';
+      setTimeout(() => {
+        modal.style.opacity = '1';
+        const newEl = modalContent.querySelector('img,video');
+        newEl.style.opacity = '1';
+        newEl.style.transform = 'translateX(0)';
+        newEl.focus && newEl.focus();
+        animating = false;
+      }, 10);
+      // Accessibility: save last focused element and focus modal
+      lastFocusedElement = document.activeElement;
+      setTimeout(() => {
+        closeBtn.focus();
+      }, 100);
+    }
+    currentIndex = index;
+    updateCounter();
+    prevBtn.style.display = galleryItems.length > 1 ? '' : 'none';
+    nextBtn.style.display = galleryItems.length > 1 ? '' : 'none';
+  }
+
+  function closeModal() {
+    // Fade out modal
+    modal.style.opacity = '1';
+    modal.style.pointerEvents = 'auto';
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+    // Enable body scroll
+    document.body.setAttribute('data-scroll', 'true');
+    setTimeout(() => {
+      modalContent.querySelectorAll('img,video').forEach(e => e.remove());
+      currentIndex = -1;
+      // Accessibility: restore focus
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }, 300);
+  }
+
+  galleryItems.forEach((item, idx) => {
+    item.addEventListener('click', function() {
+      showModal(idx, 0);
+    });
+    item.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showModal(idx, 0);
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  prevBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    showModal(currentIndex - 1, -1);
+  });
+
+  nextBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    showModal(currentIndex + 1, 1);
+  });
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (modal.classList.contains('hidden')) return;
+    if (e.key === 'Escape') {
+      closeModal();
+    } else if (e.key === 'ArrowRight') {
+      showModal(currentIndex + 1, 1);
+    } else if (e.key === 'ArrowLeft') {
+      showModal(currentIndex - 1, -1);
+    }
+    trapFocus(e);
+  });
+
+  // Zoom effect for images in modal
+  function enableZoom(img) {
+    let scale = 1;
+    let originX = 0.5, originY = 0.5;
+    let dragging = false, lastX = 0, lastY = 0, offsetX = 0, offsetY = 0;
+
+    img.style.cursor = 'zoom-in';
+
+    img.addEventListener('click', function(e) {
+      if (scale === 1) {
+        scale = 2;
+        img.style.cursor = 'grab';
+        // Set transform origin based on click position
+        const rect = img.getBoundingClientRect();
+        originX = ((e.clientX - rect.left) / rect.width);
+        originY = ((e.clientY - rect.top) / rect.height);
+        img.style.transformOrigin = `${originX * 100}% ${originY * 100}%`;
+        img.style.transform = `scale(${scale})`;
+      } else {
+        scale = 1;
+        img.style.cursor = 'zoom-in';
+        img.style.transformOrigin = '50% 50%';
+        img.style.transform = 'scale(1)';
+        img.style.transition = 'transform 0.3s';
+        offsetX = 0;
+        offsetY = 0;
+      }
+    });
+
+    // Drag to move when zoomed
+    img.addEventListener('mousedown', function(e) {
+      if (scale === 1) return;
+      dragging = true;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      img.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', function(e) {
+      if (!dragging) return;
+      offsetX += (e.clientX - lastX);
+      offsetY += (e.clientY - lastY);
+      lastX = e.clientX;
+      lastY = e.clientY;
+      img.style.transform = `scale(${scale}) translate(${offsetX / scale}px, ${offsetY / scale}px)`;
+    });
+
+    window.addEventListener('mouseup', function() {
+      if (dragging) {
+        dragging = false;
+        img.style.cursor = 'grab';
+      }
+    });
+
+    // Reset zoom on modal close
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        scale = 1;
+        img.style.cursor = 'zoom-in';
+        img.style.transformOrigin = '50% 50%';
+        img.style.transform = 'scale(1)';
+        offsetX = 0;
+        offsetY = 0;
+      }
+    });
+  }
+
+  // Patch showModal to enable zoom for images
+  const originalShowModal = showModal;
+  showModal = function(index, slideDirection = 0) {
+    originalShowModal(index, slideDirection);
+    // Enable zoom for images
+    const img = modalContent.querySelector('img');
+    if (img) enableZoom(img);
+  };
+
+  // Touch swipe support for modal navigation
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let touchActive = false;
+
+  modalContent.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+      touchActive = true;
+      touchStartX = e.touches[0].clientX;
+    }
+  });
+
+  modalContent.addEventListener('touchmove', function(e) {
+    if (!touchActive) return;
+    touchEndX = e.touches[0].clientX;
+  });
+
+  modalContent.addEventListener('touchend', function(e) {
+    if (!touchActive) return;
+    const deltaX = touchEndX - touchStartX;
+    if (Math.abs(deltaX) > 50) { // threshold for swipe
+      if (deltaX < 0) {
+        // Swipe left: next
+        showModal(currentIndex + 1, 1);
+      } else {
+        // Swipe right: prev
+        showModal(currentIndex - 1, -1);
+      }
+    }
+    touchActive = false;
+    touchStartX = 0;
+    touchEndX = 0;
+  });
+});
+</script>
+{{ else }}
+<div class="text-red-600">No directory specified for gallery.</div>
+{{ end }}
