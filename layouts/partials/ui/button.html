@@ -1,4 +1,14 @@
-<a href="{{ .url }}" class="inline-flex px-8 py-3 {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group" data-aos="fade-up" data-aos-duration="1400">
+{{ if eq .elem "button" }}
+<button {{ if eq .type "submit" }}type="submit"{{ else }}type="button"{{ end }} class="inline-flex px-8 py-3 {{ if .width }}{{ .width }}{{ else }}w-full{{ end }} {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group cursor-pointer" {{ if eq .animation "none" }} {{ else }}data-aos="fade-up" data-aos-duration="1400"{{ end }}>
+    <span>
+        {{ .label }}
+    </span>
+    <svg class="size-3 text-inherit ml-3 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+        <path class="fill-current" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
+    </svg>
+</button>
+{{ else }}
+<a href="{{ .url }}" class="inline-flex px-8 py-3 {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group" {{ if eq .animation "none"}} {{ else }}data-aos="fade-up" data-aos-duration="1400"{{ end }}>
     <span>
         {{ .label }}
     </span>
@@ -6,3 +16,4 @@
         <path class="fill-current" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/>
     </svg>
 </a>
+{{ end }}

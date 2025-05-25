@@ -11,6 +11,9 @@
 {{ end }}
 {{ end }}
 
+{{/*  favicon  */}}
+<link rel="icon" href="{{ "images/logo.png" | relURL }}" type="image/png">
+
 {{/*  title  */}}
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Page.Title }} - {{ site.Title }}{{ end }}</title>
 

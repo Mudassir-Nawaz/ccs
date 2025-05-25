@@ -1,0 +1,8 @@
+{{ define "main" }}
+    <section class="px-4 text-center pb-50 relative {{ if site.Params.logo }}top-35{{ else }}top-10{{ end }} flex jusctify-center items-center">
+        <div class="space-y-5 max-w-3xl mx-auto">
+            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000"><span class="text-gradient">404</span> <br> Page Not Found!</h1>
+            {{ partial "ui/button.html" (dict "label" "Go Home" "url" "/") }}
+        </div>
+    </section>
+{{ end }}

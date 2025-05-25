@@ -1,0 +1,100 @@
+{{ define "main" }}
+    <section>
+        <div class="px-4 text-center relative {{ if site.Params.logo }}top-35{{ else }}top-10{{ end }}">
+            <div class="space-y-5 max-w-3xl mx-auto">
+                <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">{{ .Title }}</h1>
+                <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+            </div>
+        </div>
+        <div class="container mx-auto py-20 px-4 {{ if site.Params.logo}}mt-35{{ else }}mt-10{{ end }}">
+            <div class="lg:flex items-center justify-between">
+                <div class="lg:w-1/2 w-full space-y-5">
+                    <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Monthly Donations</h1>
+                    <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                </div>
+                <div class="xl:w-1/2 lg:w-7/12 relative w-full lg:mt-0 mt-12 md:px-8 space-y-5" role="list" data-aos="fade-up" data-aos-duration="1400">
+                    <div class="absolute size-full -ml-12 mt-20">
+                        {{ partial "patterns/sprinkle.html" . }}
+                    </div>
+                    <div role="listitem" class="bg-light/70 cursor-pointer shadow rounded-lg p-8 relative z-30 space-y-5">
+                        <div class="md:flex items-center justify-between">
+                            <h2 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">Starter</h2>
+                            <p class="text-2xl tracking-wider leading-13 font-semibold text-dark font-primary md:mt-0 mt-4">FREE</p>
+                        </div>
+                        <p class="text-lg font-primary text-dark-dim tracking-wider">Full access to all features and
+                            no credit card required
+                        </p>
+                    </div>
+                    <div role="listitem" class="bg-light/70 cursor-pointer shadow rounded-lg flex relative z-30">
+                        <div class="w-2.5 h-auto bg-primary rounded-l-md"></div>
+                        <div class="w-full p-8 space-y-5">
+                            <div class="md:flex items-center justify-between">
+                                <h2 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">Personal</h2>
+                                <p class="text-2xl tracking-wider leading-13 font-semibold text-dark font-primary md:mt-0 mt-4">$18 <span class="text-base">/mo</span></p>
+                            </div>
+                            <p class="text-lg font-primary text-dark-dim tracking-wider">Full access to all features and
+                                no credit card required
+                            </p>
+                        </div>
+                    </div>
+                    <div role="listitem" class="bg-light/70 cursor-pointer shadow rounded-lg p-8 relative z-30 space-y-5">
+                        <div class="md:flex items-center justify-between">
+                            <h2 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">Premium</h2>
+                            <p class="text-2xl tracking-wider leading-13 font-semibold text-dark font-primary md:mt-0 mt-4">$50 <span class="text-base">/mo</span></p>
+                        </div>
+                        <p class="text-lg font-primary text-dark-dim tracking-wider">Full access to all features and
+                            no credit card required
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-5 max-w-3xl px-4 mx-auto text-center pt-20">
+                <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">One-time Donations</h1>
+                <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+            </div>
+
+            <div class="container mx-auto pt-20 flex flex-col lg:flex-row items-center gap-5">
+                <div
+                class="flex flex-col justify-between px-6 lg:px-[35px] xl:px-[50px] py-7 lg:py-[50px] xl:py-[70px] w-full sm:w-96 h-[380px] lg:h-[450px] xl:h-[500px] bg-light-dim rounded-[50px]">
+                <div class="space-y-5">
+                    <h2 class="text-3xl tracking-wider leading-13 font-bold text-dark font-primary">Premium</h2>
+                    <p class="text-lg font-primary text-dark-dim tracking-wider">Full access to all features and
+                        no credit card required
+                    </p>
+                </div>
+                <div>
+                    <p class="text-dark-dim text-3xl font-bold">$299</p>
+                    <button class="flex items-center justify-center gap-5 mt-5 w-full py-2 lg:py-4  bg-light rounded-[100px]  text-dark text-xl md:text-lg lg:text-xl font-medium font-primary cursor-pointer">Get started now<svg width="10" height="10" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.89715 1.12408C4.89715 0.503267 5.41394 0 6.05142 0H15.8457C16.4832 0 17 0.503267 17 1.12408V10.6622C17 11.283 16.4832 11.7863 15.8457 11.7863C15.2082 11.7863 14.6915 11.283 14.6915 10.6622V3.83784L1.97046 16.2261C1.51969 16.6651 0.788848 16.6651 0.338078 16.2261C-0.112693 15.7871 -0.112693 15.0754 0.338078 14.6364L13.0591 2.24816H6.05142C5.41394 2.24816 4.89715 1.74489 4.89715 1.12408Z" class=" fill-black"></path></svg></button>
+                </div>
+                </div>
+                <div
+                class="flex flex-col justify-between -translate-y-5 px-6 lg:px-[35px] xl:px-[50px] py-7 lg:py-[50px] xl:py-[70px] w-full sm:w-96 h-[380px] lg:h-[450px] xl:h-[500px] bg-light-dim rounded-[50px]">
+                <div class="space-y-5">
+                    <h2 class="text-3xl tracking-wider leading-13 font-bold text-dark font-primary">Premium</h2>
+                    <p class="text-lg font-primary text-dark-dim tracking-wider">Full access to all features and
+                        no credit card required
+                    </p>
+                </div>
+                <div>
+                    <p class="text-dark-dim text-3xl font-bold">$299</p>
+                    <button class="flex items-center justify-center gap-5 mt-5 w-full py-2 lg:py-4  bg-light rounded-[100px]  text-dark text-xl md:text-lg lg:text-xl font-medium font-primary cursor-pointer">Get started now<svg width="10" height="10" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.89715 1.12408C4.89715 0.503267 5.41394 0 6.05142 0H15.8457C16.4832 0 17 0.503267 17 1.12408V10.6622C17 11.283 16.4832 11.7863 15.8457 11.7863C15.2082 11.7863 14.6915 11.283 14.6915 10.6622V3.83784L1.97046 16.2261C1.51969 16.6651 0.788848 16.6651 0.338078 16.2261C-0.112693 15.7871 -0.112693 15.0754 0.338078 14.6364L13.0591 2.24816H6.05142C5.41394 2.24816 4.89715 1.74489 4.89715 1.12408Z" class=" fill-black"></path></svg></button>
+                </div>
+                </div>
+                <div
+                class="flex flex-col justify-between px-6 lg:px-[35px] xl:px-[50px] py-7 lg:py-[50px] xl:py-[70px] w-full sm:w-96 h-[380px] lg:h-[450px] xl:h-[500px] bg-light-dim rounded-[50px]">
+                <div class="space-y-5">
+                    <h2 class="text-3xl tracking-wider leading-13 font-bold text-dark font-primary">Premium</h2>
+                    <p class="text-lg font-primary text-dark-dim tracking-wider">Full access to all features and
+                        no credit card required
+                    </p>
+                </div>
+                <div>
+                    <p class="text-dark-dim text-3xl font-bold">$299</p>
+                    <button class="flex items-center justify-center gap-5 mt-5 w-full py-2 lg:py-4  bg-light rounded-[100px]  text-dark text-xl md:text-lg lg:text-xl font-medium font-primary cursor-pointer">Get started now<svg width="10" height="10" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.89715 1.12408C4.89715 0.503267 5.41394 0 6.05142 0H15.8457C16.4832 0 17 0.503267 17 1.12408V10.6622C17 11.283 16.4832 11.7863 15.8457 11.7863C15.2082 11.7863 14.6915 11.283 14.6915 10.6622V3.83784L1.97046 16.2261C1.51969 16.6651 0.788848 16.6651 0.338078 16.2261C-0.112693 15.7871 -0.112693 15.0754 0.338078 14.6364L13.0591 2.24816H6.05142C5.41394 2.24816 4.89715 1.74489 4.89715 1.12408Z" class=" fill-black"></path></svg></button>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{{ end }}

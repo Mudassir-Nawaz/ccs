@@ -44,6 +44,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Custom smooth, auto-moving slider for .awards-swiper (flex container of images)
+    const swiper = document.querySelector('.awards-container');
+    if (swiper) {
+    const inner = swiper.querySelector('.awards-swiper');
+    if (inner) {
+        // Duplicate images for seamless loop
+        inner.innerHTML += inner.innerHTML;
+
+        let scrollSpeed = 1;
+        let isPaused = false;
+        let translateX = 0;
+
+        // Calculate total width of original images
+        const images = Array.from(inner.querySelectorAll('img')).slice(0, inner.children.length / 2);
+        let totalWidth = 0;
+        images.forEach(img => {
+        const style = getComputedStyle(img);
+        totalWidth += img.offsetWidth + parseInt(style.marginLeft || 0) + parseInt(style.marginRight || 0);
+        });
+
+        function autoScroll() {
+        if (!isPaused) {
+            translateX -= scrollSpeed;
+            if (Math.abs(translateX) >= totalWidth) {
+            translateX = 0;
+            }
+            inner.style.transform = `translateX(${translateX}px)`;
+        }
+        requestAnimationFrame(autoScroll);
+        }
+
+        inner.addEventListener('mouseenter', () => isPaused = true);
+        inner.addEventListener('mouseleave', () => isPaused = false);
+
+        inner.style.willChange = 'transform';
+        inner.style.transition = 'none';
+        swiper.style.overflow = 'hidden';
+
+        requestAnimationFrame(autoScroll);
+    }
+    }
+
     // Change header on scroll
     window.addEventListener('scroll', () => {
         menu.classList.add('translate-x-full');

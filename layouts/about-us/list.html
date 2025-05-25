@@ -1,0 +1,122 @@
+{{ define "main" }}
+    <section>
+        <div class="px-4 text-center relative {{ if site.Params.logo }}top-35{{ else }}top-10{{ end }}">
+            <div class="space-y-5 max-w-3xl mx-auto">
+                <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">{{ .Title }}</h1>
+                <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+            </div>
+        </div>
+
+        <div class="container mx-auto py-20 px-4 {{ if site.Params.logo}}mt-35{{ else }}mt-10{{ end }}">
+            {{/*  school team section */}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" data-aos="fade-up" data-aos-duration="1000">
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Founder</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">CEO</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Product Manager</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Developer</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Desginer</p>
+                    </div>
+                </div>
+            </div>
+            {{/*  end school team  */}}
+
+            {{/*  board team section  */}}
+            <div class="space-y-5 max-w-3xl mx-auto text-center mt-20">
+                <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Board Team Members</h1>
+                <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-20" data-aos="fade-up" data-aos-duration="1000">
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Founder</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">CEO</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Product Manager</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Developer</p>
+                    </div>
+                </div>
+
+                <div class="rounded-lg lg:shadow-lg h-96 bg-cover bg-center bg-[url('https://images.pexels.com/photos/2897883/pexels-photo-2897883.jpeg')]">
+                    <div class="bg-gradient-to-b from-transparent to-dark from-30% size-full space-y-1 text-center flex justify-end flex-col rounded-b-lg pb-5">
+                        <h3 class="text-xl font-bold text-light font-primary tracking-wider">Placeholder Name</h3>
+                        <p class="text-light-dim font-primary tracking-wider">Desginer</p>
+                    </div>
+                </div>
+            </div>
+            {{/*  end board team  */}}
+
+            {{/*  awards section  */}}
+            <div class="awards-container relative overflow-hidden w-full bg-gradient p-10 mt-20">
+                <h2 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary text-center mb-10" data-aos="fade-up" data-aos-duration="1000">Awards</h2>
+                <div data-aos="fade-up" data-aos-duration="1200">
+                    <div class="awards-swiper flex gap-5 whitespace-nowrap">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                        <img src="https://placehold.co/400" alt="award" class="size-40 inline-block">
+                    </div>
+                </div>
+            </div>
+            {{/*  end awards  */}}
+
+            {{/*  grants section  */}}
+            <div class="space-y-5 max-w-3xl mx-auto text-center mt-20">
+                <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Grants Approved</h1>
+                <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta excepturi culpa officia illum doloribus ullam esse cupiditate! Eius facilis dolor perspiciatis libero maxime ab rem quos, dignissimos ea, ratione sit ad facere, fugiat itaque officia suscipit.</p>
+            </div>
+            {{/*  end grants  */}}
+        </div>
+    </section>
+{{ end }}

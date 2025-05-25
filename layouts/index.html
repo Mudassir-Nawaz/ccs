@@ -2,7 +2,7 @@
 {{/*  hero section  */}}
 <section class="w-full h-screen">
     {{ $hero_video := "videos/placeholder.mp4" | relURL }}
-    <div class="relative top-34 h-screen flex justify-center items-center">
+    <div class="relative {{ if site.Params.logo }}top-35{{ else }}top-10{{ end }} h-screen flex justify-center items-center">
         <video autoplay muted loop class="absolute inset-0 h-full w-full object-cover object-top">
             <source src="{{ $hero_video }}" type="video/mp4">
         </video>
@@ -13,17 +13,17 @@
                 <div class="swiper-wrapper">
                     <div class="space-y-5 text-center swiper-slide">
                         <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
-                        <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        <p class="text-lg font-primary text-light-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
                     </div>
     
                     <div class="space-y-5 text-center swiper-slide">
                         <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
-                        <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        <p class="text-lg font-primary text-light-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
                     </div>
     
                     <div class="space-y-5 text-center swiper-slide">
                         <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
-                        <p class="text-lg font-primary text-gray-300 tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                        <p class="text-lg font-primary text-light-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
 {{/*  end hero  */}}
 
 {{/*  gallery section  */}}
-<section class="mt-34">
+<section class="{{ if site.Params.logo }}mt-35{{ else }}mt-10{{ end }}">
     <div class="container mx-auto space-y-20 py-20 px-4">
         <div class="space-y-5 max-w-3xl mx-auto text-center">
             <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">How we do it</h1>
