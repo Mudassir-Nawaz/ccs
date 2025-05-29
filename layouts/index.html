@@ -1,30 +1,23 @@
 {{ define "main" }}
 {{/*  hero section  */}}
+{{ with .Params.hero_section }}
 <section class="w-full h-screen">
     {{ $hero_video := "videos/placeholder.mp4" | relURL }}
     <div class="relative {{ if site.Params.logo }}top-35{{ else }}top-10{{ end }} h-screen flex justify-center items-center">
-        <video autoplay muted loop class="absolute inset-0 h-full w-full object-cover object-top">
-            <source src="{{ $hero_video }}" type="video/mp4">
-        </video>
+        {{ $hero_bg := "images/dev/hero-bg.png" | relURL }}
+        <img src="{{ $hero_bg }}" class="absolute inset-0 h-full w-full object-cover object-top">
         <div class="absolute bg-black/70 inset-0"></div>
 
         <div class="container relative mx-auto">
             <div class="swiper hero-swiper max-w-xs sm:max-w-md lg:max-w-3xl">
                 <div class="swiper-wrapper">
-                    <div class="space-y-5 text-center swiper-slide">
-                        <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
-                        <p class="text-lg font-primary text-light-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                    {{ range .slides }}
+                    <div class="space-y-5 text-center swiper-slide" data-aos="fade-up" data-aos-duration="1000">
+                        <p class="font-primary text-light-dim tracking-wider">{{ .sub_heading | safeHTML }}</p>
+                        <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary">{{ .heading | safeHTML }}</h1>
+                        <p class="text-lg font-primary text-light-dim tracking-wider">{{ .description | safeHTML }}</p>
                     </div>
-    
-                    <div class="space-y-5 text-center swiper-slide">
-                        <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
-                        <p class="text-lg font-primary text-light-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                    </div>
-    
-                    <div class="space-y-5 text-center swiper-slide">
-                        <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary" data-aos="fade-up" data-aos-duration="1000">Welcome to <br> <span class="text-gradient">Christian Community School</span></h1>
-                        <p class="text-lg font-primary text-light-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                    </div>
+                    {{ end }}
                 </div>
             </div>
     
@@ -42,25 +35,34 @@
         </div>
     </div>
 </section>
+{{ end }}
 {{/*  end hero  */}}
 
 {{/*  gallery section  */}}
+{{ with .Params.gallery_section }}
+{{ if .enable }}
 <section class="{{ if site.Params.logo }}mt-35{{ else }}mt-10{{ end }}">
     <div class="container mx-auto space-y-20 py-20 px-4">
-        <div class="space-y-5 max-w-3xl mx-auto text-center">
-            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">How we do it</h1>
-            <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-            {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+        <div class="space-y-5 max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .title | safeHTML }}</h1>
+            <p class="text-lg font-primary text-dark-dim tracking-wider">{{ .details | safeHTML }}</p>
+            {{ with .button }}
+            {{ partial "ui/button.html" (dict "label" .label "url" (.url | relURL )) }}
+            {{ end }}
         </div>
-        <div data-aos="fade-up" data-aos-duration="1400">
-            {{ $placehold := resources.Get "galleries/placeholder" }}
-            {{ partial "components/gallery.html" (dict "dir" $placehold ) }}
+        <div data-aos="fade-up" data-aos-duration="1200">
+            {{ $home_gallery := resources.Get .gallery }}
+            {{ partial "components/gallery.html" (dict "dir" $home_gallery ) }}
         </div>
     </div>
 </section>
+{{ end }}
+{{ end }}
 {{/*  end gallery  */}}
 
 {{/*  goals section  */}}
+{{ with .Params.goals_section }}
+{{ if .enable }}
 <section class="py-20 bg-light-dim relative overflow-hidden">
     <div class="absolute size-40 rounded-full top-10 lg:top-20 left-5 lg:left-30 bg-accent/10"></div>
     <div class="absolute size-60 rounded-full -bottom-40 left-1/2 -translate-x-1/2 bg-accent/10"></div>
@@ -68,34 +70,24 @@
     <div class="hidden lg:block absolute size-36 rounded-full right-5 bottom-20 bg-accent/10"></div>
     <div class="relative container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:justify-between">
         <div class="space-y-5 max-w-md mx-auto text-center lg:text-left" data-aos="fade-up" data-aos-duration="1000">
-            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Our Goals</h1>
-            <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-            {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .title | safeHTML }}</h1>
+            <p class="text-lg font-primary text-dark-dim tracking-wider">{{ .details | safeHTML }}</p>
+            {{ with .button }}
+            {{ partial "ui/button.html" (dict "label" .label "url" (.url | relURL)) }}
+            {{ end }}
         </div>
-        <div class="space-y-5" data-aos="fade-up" data-aos-duration="1400">
+        <div class="space-y-5" data-aos="fade-up" data-aos-duration="1200">
             <div class="goals-pagination size-14 mx-auto lg:mx-0 rounded-full border border-dark flex justify-center items-center text-lg font-primary text-dark"></div>
             <div class="swiper goals-swiper">
                 <div class="swiper-wrapper">
+                    {{ range .slides }}
                     <div class="swiper-slide">
                         <div class="space-y-2 text-center lg:max-w-sm lg:text-left">
-                            <h1 class="text-xl tracking-wider font-bold text-dark font-primary">Goal 1</h1>
-                            <p class="font-primary text-dark-dim tracking-wider">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+                            <h1 class="text-xl tracking-wider font-bold text-dark font-primary">{{ .title | safeHTML }}</h1>
+                            <p class="font-primary text-dark-dim tracking-wider">{{ .details | safeHTML }}</p>
                         </div>
                     </div>
-
-                    <div class="swiper-slide">
-                        <div class="space-y-2 text-center lg:max-w-sm lg:text-left">
-                            <h1 class="text-xl tracking-wider font-bold text-dark font-primary">Goal 1</h1>
-                            <p class="font-primary text-dark-dim tracking-wider">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="space-y-2 text-center lg:max-w-sm lg:text-left">
-                            <h1 class="text-xl tracking-wider font-bold text-dark font-primary">Goal 1</h1>
-                            <p class="font-primary text-dark-dim tracking-wider">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                        </div>
-                    </div>
+                    {{ end }}
                 </div>
             </div>
             <div class="flex items-center justify-center lg:justify-start gap-5">
@@ -113,56 +105,29 @@
         </div>
     </div>
 </section>
+{{ end }}
+{{ end }}
 {{/*  end goals  */}}
 
 {{/*  accomplishments section  */}}
+{{ with where .Site.RegularPages "Section" "accomplishments" }}
 <section class="py-20">
     <div class="container mx-auto px-4 space-y-10">
-        <div class="flex flex-col lg:flex-row justify-between items-center gap-5">
-            <div class="space-y-5 lg:w-1/2">
-                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 1</h1>
-                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
+        {{ range $i, $p := . }}
+        <div class="flex flex-col {{ if not (modBool $i 2) }}lg:flex-row-reverse{{ else }}lg:flex-row{{ end }} justify-between items-center gap-5">
+            <div class="space-y-5 lg:w-1/2" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="text-4xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .Title  | safeHTML }}</h1>
+                <p class="text-lg font-primary text-dark-dim tracking-wider">{{ .Content | truncate 120 }}</p>
+                {{ partial "ui/button.html" (dict "label" "Read More" "url" .RelPermalink) }}
             </div>
-            <div class="lg:w-1/2">
-                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 ml-auto" data-aos="fade-up" data-aos-duration="1400">
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row-reverse justify-between items-center gap-5">
-            <div class="space-y-5 lg:w-1/2">
-                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 2</h1>
-                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
-            </div>
-            <div class="lg:w-1/2">
-                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 mr-auto" data-aos="fade-up" data-aos-duration="1400">
+            <div class="lg:w-1/2" data-aos="fade-up" data-aos-duration="1200">
+                <img src="{{ $p.Params.cover | relURL }}" alt="" class="rounded-3xl shadow-sm object-cover size-96 {{ if not (modBool $i 2) }}mr-auto{{ else }}ml-auto{{ end }}">
             </div>
         </div>
-
-        <div class="flex flex-col lg:flex-row justify-between items-center gap-5">
-            <div class="space-y-5 lg:w-1/2">
-                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 3</h1>
-                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
-            </div>
-            <div class="lg:w-1/2">
-                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 ml-auto" data-aos="fade-up" data-aos-duration="1400">
-            </div>
-        </div>
-
-        <div class="flex flex-col lg:flex-row-reverse justify-between items-center gap-5">
-            <div class="space-y-5 lg:w-1/2">
-                <h1 class="text-xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Accomplishment 4</h1>
-                <p class="font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
-                {{ partial "ui/button.html" (dict "label" "Read More" "url" "/about/") }}
-            </div>
-            <div class="lg:w-1/2">
-                <img src="https://placehold.co/700x500" alt="" class="rounded-3xl shadow-sm object-cover size-96 mr-auto" data-aos="fade-up" data-aos-duration="1400">
-            </div>
-        </div>
+        {{ end }}
     </div>
 </section>
+{{ end }}
 {{/*  end accomplishments  */}}
 
 {{/*  cta section  */}}
@@ -170,7 +135,7 @@
     <div class="max-w-5xl mx-auto px-4 flex flex-col lg:flex-row justify-between lg:items-center gap-5">
         <div class="space-y-5 lg:w-1/2">
             <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Sponser a kid</h1>
-            {{ partial "ui/button.html" (dict "label" "Get Started" "url" "/about/" "color" "bg-gradient-to-br from-dark-dim to-dark text-light") }}
+            {{ partial "ui/button.html" (dict "label" "Get Started" "animation" "true" "url" "/about/" "color" "bg-gradient-to-br from-dark-dim to-dark text-light") }}
         </div>
         <div class="mx-[60px] hidden lg:inline-block">
             <span class="px-[1px] rotate-12 bg-dark inline-block h-[111.4px]"></span>

@@ -21,9 +21,9 @@
           data-type="{{ if $isVideo }}video{{ else }}image{{ end }}"
           data-src="{{ $res.RelPermalink }}">
           {{ if $isVideo }}
-            <video src="{{ $res.RelPermalink }}" class="w-full h-full object-cover" muted playsinline aria-label="{{ $res.Name }}"></video>
+            <video src="{{ $res.RelPermalink }}" class="w-full h-full object-cover object-top" muted playsinline aria-label="{{ $res.Name }}"></video>
           {{ else if $img }}
-            <img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}" class="w-full h-full object-cover">
+            <img src="{{ $img.RelPermalink }}" alt="{{ $img.Name }}" class="w-full h-full object-cover object-top">
           {{ end }}
         </figure>
       {{ end }}

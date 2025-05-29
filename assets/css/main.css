@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @source "hugo_stats.json";
 
+@plugin "@tailwindcss/typography";
+
 @theme {
     --font-primary: "Urbanist", sans-serif;
 
