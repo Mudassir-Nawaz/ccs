@@ -12,7 +12,7 @@
             <div class="swiper hero-swiper max-w-xs sm:max-w-md lg:max-w-3xl">
                 <div class="swiper-wrapper">
                     {{ range .slides }}
-                    <div class="space-y-5 text-center swiper-slide" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="space-y-5 text-center swiper-slide"  >
                         <p class="font-primary text-light-dim tracking-wider">{{ .sub_heading | safeHTML }}</p>
                         <h1 class="text-5xl tracking-wider leading-13 font-bold text-light font-primary">{{ .heading | safeHTML }}</h1>
                         <p class="text-lg font-primary text-light-dim tracking-wider">{{ .description | safeHTML }}</p>
@@ -43,14 +43,14 @@
 {{ if .enable }}
 <section class="{{ if site.Params.logo }}mt-35{{ else }}mt-10{{ end }}">
     <div class="container mx-auto space-y-20 py-20 px-4">
-        <div class="space-y-5 max-w-3xl mx-auto text-center" data-aos="fade-up" data-aos-duration="1000">
+        <div class="space-y-5 max-w-3xl mx-auto text-center"  >
             <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .title | safeHTML }}</h1>
             <p class="text-lg font-primary text-dark-dim tracking-wider">{{ .details | safeHTML }}</p>
             {{ with .button }}
             {{ partial "ui/button.html" (dict "label" .label "url" (.url | relURL )) }}
             {{ end }}
         </div>
-        <div data-aos="fade-up" data-aos-duration="1200">
+        <div  >
             {{ $home_gallery := resources.Get .gallery }}
             {{ partial "components/gallery.html" (dict "dir" $home_gallery ) }}
         </div>
@@ -69,14 +69,14 @@
     <div class="absolute size-30 rounded-full top-1/2 -translate-y-1/2 -right-15 lg:-top-10 lg:right-1/5 lg:translate-y-0 bg-accent/10"></div>
     <div class="hidden lg:block absolute size-36 rounded-full right-5 bottom-20 bg-accent/10"></div>
     <div class="relative container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:justify-between">
-        <div class="space-y-5 max-w-md mx-auto text-center lg:text-left" data-aos="fade-up" data-aos-duration="1000">
+        <div class="space-y-5 max-w-md mx-auto text-center lg:text-left"  >
             <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .title | safeHTML }}</h1>
             <p class="text-lg font-primary text-dark-dim tracking-wider">{{ .details | safeHTML }}</p>
             {{ with .button }}
             {{ partial "ui/button.html" (dict "label" .label "url" (.url | relURL)) }}
             {{ end }}
         </div>
-        <div class="space-y-5" data-aos="fade-up" data-aos-duration="1200">
+        <div class="space-y-5"  >
             <div class="goals-pagination size-14 mx-auto lg:mx-0 rounded-full border border-dark flex justify-center items-center text-lg font-primary text-dark"></div>
             <div class="swiper goals-swiper">
                 <div class="swiper-wrapper">
@@ -115,12 +115,12 @@
     <div class="container mx-auto px-4 space-y-10">
         {{ range $i, $p := . }}
         <div class="flex flex-col {{ if not (modBool $i 2) }}lg:flex-row-reverse{{ else }}lg:flex-row{{ end }} justify-between items-center gap-5">
-            <div class="space-y-5 lg:w-1/2" data-aos="fade-up" data-aos-duration="1000">
+            <div class="space-y-5 lg:w-1/2"  >
                 <h1 class="text-4xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .Title  | safeHTML }}</h1>
                 <p class="text-lg font-primary text-dark-dim tracking-wider">{{ .Content | truncate 120 }}</p>
                 {{ partial "ui/button.html" (dict "label" "Read More" "url" .RelPermalink) }}
             </div>
-            <div class="lg:w-1/2" data-aos="fade-up" data-aos-duration="1200">
+            <div class="lg:w-1/2"  >
                 <img src="{{ $p.Params.cover | relURL }}" alt="" class="rounded-3xl shadow-sm object-cover size-96 {{ if not (modBool $i 2) }}mr-auto{{ else }}ml-auto{{ end }}">
             </div>
         </div>
@@ -134,14 +134,14 @@
 <section class="py-20 bg-gradient">
     <div class="max-w-5xl mx-auto px-4 flex flex-col lg:flex-row justify-between lg:items-center gap-5">
         <div class="space-y-5 lg:w-1/2">
-            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary" data-aos="fade-up" data-aos-duration="1000">Sponser a kid</h1>
+            <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary"  >Sponser a kid</h1>
             {{ partial "ui/button.html" (dict "label" "Get Started" "animation" "true" "url" "/about/" "color" "bg-gradient-to-br from-dark-dim to-dark text-light") }}
         </div>
         <div class="mx-[60px] hidden lg:inline-block">
             <span class="px-[1px] rotate-12 bg-dark inline-block h-[111.4px]"></span>
         </div>
         <div class="lg:w-1/2">
-            <p class="text-lg font-primary text-dark-dim tracking-wider" data-aos="fade-up" data-aos-duration="1200">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
+            <p class="text-lg font-primary text-dark-dim tracking-wider"  >Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt aut dolorum harum, perferendis at vitae, voluptatibus voluptatem cum, hic atque perspiciatis quidem quo unde.</p>
         </div>
     </div>
 </section>

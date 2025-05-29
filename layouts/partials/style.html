@@ -1,6 +1,5 @@
-{{ $aos := resources.Get "css/aos.css" }}
-{{ $swiper := resources.Get "css/swiper.css" }}
-{{ $bundle := slice $aos $swiper | resources.Concat "css/bundle.css" }}
+{{ $bundle := resources.Get "css/swiper.css" }}
+{{/*  {{ $bundle := slice $swiper | resources.Concat "css/bundle.css" }}  */}}
 
 {{ if hugo.IsDevelopment }}
   <link rel="stylesheet" href="{{ $bundle.RelPermalink }}">

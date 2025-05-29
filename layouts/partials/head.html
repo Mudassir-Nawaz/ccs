@@ -1,16 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{{/*  aos  */}}
-{{ $aos := resources.Get "js/aos.js" }}
-{{ if hugo.IsDevelopment }}
-<script src="{{ $aos.RelPermalink }}"></script>
-{{ else }}
-{{ with $aos | minify | fingerprint }}
-<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-{{ end }}
-{{ end }}
-
 {{/*  favicon  */}}
 <link rel="icon" href="{{ "images/logo.png" | relURL }}" type="image/png">
 

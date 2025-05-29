@@ -1,5 +1,5 @@
 {{ if eq .elem "button" }}
-<button {{ if eq .type "submit" }}type="submit"{{ else }}type="button"{{ end }} class="inline-flex px-8 py-3 {{ if .width }}{{ .width }}{{ else }}w-full{{ end }} {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group cursor-pointer" {{ if eq .animation "true" }}data-aos="fade-up" data-aos-duration="1200"{{ end }}>
+<button {{ if eq .type "submit" }}type="submit"{{ else }}type="button"{{ end }} class="inline-flex px-8 py-3 {{ if .width }}{{ .width }}{{ else }}w-full{{ end }} {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group cursor-pointer" {{ if eq .animation "true" }} {{ end }}>
     <span>
         {{ .label }}
     </span>
@@ -8,7 +8,7 @@
     </svg>
 </button>
 {{ else }}
-<a href="{{ .url }}" class="inline-flex px-8 py-3 {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group" {{ if eq .animation "true" }}data-aos="fade-up" data-aos-duration="1200"{{ end }}>
+<a href="{{ .url }}" class="inline-flex px-8 py-3 {{ if .color }}{{ .color }}{{ else }}bg-gradient text-dark{{ end }} rounded-full text-sm font-primary justify-center items-center group" {{ if eq .animation "true" }} {{ end }}>
     <span>
         {{ .label }}
     </span>

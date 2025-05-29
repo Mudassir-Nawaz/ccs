@@ -2,11 +2,11 @@
     <section>
         <div class="px-4 text-center relative {{ if site.Params.logo }}top-35{{ else }}top-10{{ end }}">
             <div class="space-y-5">
-                <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="1000">{{ .Title }}</h1>
-                <div class="font-primary text-dark-dim prose mx-auto" data-aos="fade-up" data-aos-duration="1200">{{ .Content }}</div>
+                <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary max-w-3xl mx-auto"  >{{ .Title }}</h1>
+                <div class="font-primary text-dark-dim prose mx-auto"  >{{ .Content }}</div>
             </div>
         </div>
-        <div class="container mx-auto py-20 px-4 {{ if site.Params.logo }}mt-35{{ else }}mt-10{{ end }}" data-aos="fade-up" data-aos-duration="1400">
+        <div class="container mx-auto py-20 px-4 {{ if site.Params.logo }}mt-35{{ else }}mt-10{{ end }}"  >
             {{ $gallery := resources.Get .Params.gallery }}
             {{ partial "components/gallery.html" (dict "dir" $gallery ) }}
         </div>

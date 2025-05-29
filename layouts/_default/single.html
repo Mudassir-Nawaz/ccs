@@ -1,7 +1,7 @@
 {{ define "main" }}
     <section>
         <div class="px-4 text-center relative {{ if site.Params.logo }}top-35{{ else }}top-10{{ end }}">
-            <div class="space-y-5 max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
+            <div class="space-y-5 max-w-3xl mx-auto"  >
                 <h1 class="text-5xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .Title }}</h1>
                 {{ with .Description }}
                 <p class="text-lg font-primary text-dark-dim tracking-wider">{{ . | safeHTML }}</p>
@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <div class="container mx-auto py-20 px-4 {{ if site.Params.logo}}mt-35{{ else }}mt-10{{ end }}" data-aos="fade-up" data-aos-duration="1200">
+        <div class="container mx-auto py-20 px-4 {{ if site.Params.logo}}mt-35{{ else }}mt-10{{ end }}"  >
             <div class="prose prose-img:rounded-3xl mx-auto">
                 {{ .Content }}
             </div>
