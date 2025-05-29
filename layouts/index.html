@@ -116,7 +116,7 @@
         {{ range $i, $p := . }}
         <div class="flex flex-col {{ if not (modBool $i 2) }}lg:flex-row-reverse{{ else }}lg:flex-row{{ end }} justify-between items-center gap-5">
             <div class="space-y-5 lg:w-1/2"  >
-                <h1 class="text-4xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .Title  | safeHTML }}</h1>
+                <h3 class="text-4xl tracking-wider leading-13 font-bold text-dark font-primary">{{ .Title  | safeHTML }}</h3>
                 <p class="text-lg font-primary text-dark-dim tracking-wider">{{ .Content | truncate 120 }}</p>
                 {{ partial "ui/button.html" (dict "label" "Read More" "url" .RelPermalink) }}
             </div>

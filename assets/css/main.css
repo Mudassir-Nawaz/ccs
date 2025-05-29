@@ -22,6 +22,10 @@
     @apply bg-primary/70 text-light;
 }
 
+h1 {
+    @apply break-all;
+}
+
 .text-gradient {
     @apply bg-gradient-to-br from-primary to-accent from-40% bg-clip-text text-transparent;
 }
