@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.querySelector('.toggle-menu');
     const menu = document.querySelector('.menu');
 
-    // AOS initialization
-    AOS.init();
-
     // Swiper initialization
     const heroSwiper = new Swiper('.hero-swiper', {
         loop: true,
